@@ -1,7 +1,8 @@
 # spa
 
-> A Vue.js single page application project using vue-router by samuelayo
+> Part 2 of the Vue.js single page application project using vue-router by samuelayo
 
+For the first part of this series, please visit: https://github.com/samuelayo/vue-spapt1
 ## Build Setup
 
 ``` bash

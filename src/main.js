@@ -13,12 +13,20 @@ Vue.use(VueRouter)
 import Hello from './components/Hello'
 //import the about component
 import About from './components/About'
+//import the param component
+import Param from './components/Param'
+//import paramdetails component
+import paramdetails from './components/paramdetails'
 //define your routes
 const routes = [
 	//route for the home route of the webpage
 	{ path: '/', component: Hello },
 	//route for the about route of the webpage
-	{ path: '/about', component: About }
+	{ path: '/about', component: About }, 
+  //route for the param route of the webpage
+  { path: '/param', component: Param },
+  //route for the paramdetails passing in params
+  { path: '/Paramdetails/:id', component: paramdetails, name: 'Paramdetails' }
 ]
 
 // Create the router instance and pass the `routes` option
@@ -27,6 +35,28 @@ const routes = [
 const router = new VueRouter({
   routes, // short for routes: routes
   mode: 'history'
+})
+
+//place the router guard
+router.beforeEach((to, from, next) => {
+  if(to.path == '/param'){
+    if(localStorage.getItem('user')==undefined){
+      var user = prompt('please enter your username');
+      var pass = prompt('please enter your password');
+      console.log(user);
+      console.log(pass);
+      if (user == 'username' && pass == 'password'){
+        localStorage.setItem('user', user);
+        next();
+      }else{
+        alert('Wrong username and password, you do not have permission to access that route');
+        return;
+      }
+      
+    }
+    
+  }
+   next()
 })
 //instatinat the vue instance
 new Vue({
